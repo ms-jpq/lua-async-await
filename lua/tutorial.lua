@@ -14,7 +14,7 @@ local pong = function (thread)
   nxt = function (cont, ...)
     if not cont
       then return ...
-      else return nxt(co.resume(thread), ...)
+      else return nxt(co.resume(thread, ...))
     end
   end
   return nxt(co.resume(thread))
@@ -27,12 +27,12 @@ local sync_example = function ()
     local x = co.yield(1)
     print(x)
     local y, z = co.yield(2, 3)
-    print(y)
-    return 4, 5
+    print(y, z)
+    local f = co.yield(4)
+    print(f)
   end)
 
-  local w, t = pong(thread)
-  print(w, t)
+  pong(thread)
 end
 
 
@@ -42,10 +42,10 @@ end
 
 
 local timeout = function (ms, callback)
-  local timer = assert(uv.new_timer())
+  local timer = uv.new_timer()
   uv.timer_start(timer, ms, 0, function ()
-    assert(uv.timer_stop(timer))
-    assert(uv.close(timer))
+    uv.timer_stop(timer)
+    uv.close(timer)
     callback()
   end)
 end
@@ -64,29 +64,33 @@ end
 local e2 = a.wrap(echo_2)
 
 
-local async_tasks_1 = a.sync(function ()
-  local x, y = a.wait(e2(1, 2))
-  print(x, y)
-  return x + y
-end)
-
+local async_tasks_1 = function()
+  return a.sync(function ()
+    local x, y = a.wait(e2(1, 2))
+    print(x, y)
+    return x + y
+  end)
+end
 
 local async_tasks_2 = function (val)
   return a.sync(function ()
     -- await all
     local w, z = a.wait_all{e2(val, val + 1), e2(val + 2, val + 3)}
-    print(unpack(w), unpack(z))
-    return 5
+    print(unpack(w))
+    print(unpack(z))
+    return 4
   end)
 end
 
 
-local async_example = a.sync(function ()
-  -- composable, await other async thunks
-  local u = a.wait(async_tasks_1)
-  local v = a.wait(async_tasks_2(3))
-  print(u + v)
-end)
+local async_example = function ()
+  return a.sync(function ()
+    -- composable, await other async thunks
+    local u = a.wait(async_tasks_1())
+    local v = a.wait(async_tasks_2(3))
+    print(u + v)
+  end)
+end
 
 
 --#################### ############ ####################
@@ -104,17 +108,21 @@ local vim_command = function ()
 end
 
 
-local textlock_fail = a.sync(function ()
-  a.wait(e2(1, 2))
-  vim_command()
-end)
+local textlock_fail = function()
+  return a.sync(function ()
+    a.wait(e2(1, 2))
+    vim_command()
+  end)
+end
 
 
-local textlock_succ = a.sync(function ()
-  a.wait(e2(1, 2))
-  a.wait(main_loop)
-  vim_command()
-end)
+local textlock_succ = function ()
+  return a.sync(function ()
+    a.wait(e2(1, 2))
+    a.wait(main_loop)
+    vim_command()
+  end)
+end
 
 
 return {
