@@ -303,14 +303,27 @@ end
 ```
 
 ```lua
-local run = a.sync(function ()
+a.sync(function ()
   -- do something in other loop
   a.wait(main_loop)
   -- you are back!
-end)
+end)()
 ```
 
 
-## Practice!
+## Plugin!
 
 I have bundle up this tutorial as a vim plugin, you can install it the usual way.
+
+`Plug 'ms-jpq/neovim_async_tutorial'`
+
+and then call the test functions like so:
+
+`:LuaAsyncExample`
+
+`:LuaSyncExample`
+
+`:LuaTextlockFail`
+
+`:LuaTextLockSucc`
+

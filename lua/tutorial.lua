@@ -105,6 +105,7 @@ end
 
 
 local vim_command = function ()
+  vim.api.nvim_command[[echom 'calling vim command']]
 end
 
 
