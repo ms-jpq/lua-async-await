@@ -1,5 +1,7 @@
 # Neovim Async Tutorial (lua)
 
+Async Await in [90 lines](https://github.com/ms-jpq/neovim-async-tutorial/blob/master/lua/async.lua) of code.
+
 ## Preface
 
 This tutorial assumes that you are familiar with the concept of `async` `await`
