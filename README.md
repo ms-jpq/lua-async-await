@@ -315,7 +315,7 @@ end)()
 
 I have bundle up this tutorial as a vim plugin, you can install it the usual way.
 
-`Plug 'ms-jpq/neovim_async_tutorial'`
+`Plug 'ms-jpq/neovim-async-tutorial'`
 
 and then call the test functions like so:
 
