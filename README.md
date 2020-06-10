@@ -1,4 +1,4 @@
-# Neovim Async Tutorial (lua)
+# [Neovim Async Tutorial (lua)](https://ms-jpq.github.io/neovim-async-tutorial)
 
 Async Await in [90 lines](https://github.com/ms-jpq/neovim-async-tutorial/blob/master/lua/async.lua) of code.
 
