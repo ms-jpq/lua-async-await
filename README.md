@@ -95,7 +95,7 @@ local pong = function (thread)
   nxt = function (cont, ...)
     if not cont
       then return ...
-      else return nxt(co.resume(thread), ...)
+      else return nxt(co.resume(thread, ...))
     end
   end
   return nxt(co.resume(thread))
