@@ -8,7 +8,6 @@ Async Await in [90 lines](https://github.com/ms-jpq/neovim-async-tutorial/blob/m
 
 [svermeulen](https://github.com/svermeulen) for fixing [inability to return functions](https://github.com/ms-jpq/neovim-async-tutorial/issues/2).
 
-
 This tutorial assumes that you are familiar with the concept of `async` `await`
 
 You will also need to read through the [first 500 words](https://www.lua.org/pil/9.1.html) of how coroutines work in lua.
@@ -62,7 +61,7 @@ To avoid confusion, I will follow the convention used in the Lua book, and use `
 ```lua
 local co = coroutine
 
-local thread = co.create(function () 
+local thread = co.create(function ()
   local x, y, z = co.yield(something)
   return 12
 end)
@@ -201,7 +200,6 @@ Notice that we also make pong call a callback once it is done.
 
 We can see it in action here:
 
-
 ```lua
 local echo = function (...)
   local args = {...}
@@ -211,7 +209,7 @@ local echo = function (...)
   return thunk
 end
 
-local thread = co.create(function () 
+local thread = co.create(function ()
   local x, y, z = co.yield(echo(1, 2, 3))
   print(x, y, z)
   local k, f, c = co.yield(echo(4, 5, 6))
@@ -268,7 +266,7 @@ All this explicit handling of coroutines are abit ugly. The good thing is that w
 
 Simply wrap the coroutine interface with some friendly helpers
 
-```lua 
+```lua
 local pong = function (func, callback)
   local thread = co.create(func)
   ...
@@ -317,12 +315,11 @@ a.sync(function ()
 end)()
 ```
 
-
 ## Plugin!
 
 I have bundle up this tutorial as a vim plugin, you can install it the usual way.
 
-`Plug 'ms-jpq/neovim-async-tutorial'`
+`Plug 'ms-jpq/neovim-async-tutorial', {'branch': 'neo'}`
 
 and then call the test functions like so:
 
@@ -333,4 +330,3 @@ and then call the test functions like so:
 `:LuaTextlockFail`
 
 `:LuaTextLockSucc`
-
