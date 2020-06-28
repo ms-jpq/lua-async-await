@@ -4,6 +4,11 @@ Async Await in [90 lines](https://github.com/ms-jpq/neovim-async-tutorial/blob/m
 
 ## Preface
 
+### Special Thanks
+
+[svermeulen](https://github.com/svermeulen) for fixing [inability to return functions](https://github.com/ms-jpq/neovim-async-tutorial/issues/2).
+
+
 This tutorial assumes that you are familiar with the concept of `async` `await`
 
 You will also need to read through the [first 500 words](https://www.lua.org/pil/9.1.html) of how coroutines work in lua.

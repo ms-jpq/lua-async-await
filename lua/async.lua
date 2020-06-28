@@ -11,13 +11,13 @@ local pong = function (func, callback)
   local thread = co.create(func)
   local step = nil
   step = function (...)
-    local go, ret = co.resume(thread, ...)
-    if not go then
-      assert(co.status(thread) == "suspended", ret)
-    elseif type(ret) == "function" then
-      ret(step)
-    else
+    local stat, ret = co.resume(thread, ...)
+    assert(stat, ret)
+    if co.status(thread) == "dead" then
       (callback or function () end)(ret)
+    else
+      assert(type(ret) == "function", "type error :: expected func")
+      ret(step)
     end
   end
   step()
@@ -84,4 +84,3 @@ return {
   wait_all = await_all,
   wrap = wrap,
 }
-

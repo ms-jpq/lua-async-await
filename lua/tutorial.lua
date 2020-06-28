@@ -72,13 +72,16 @@ local async_tasks_1 = function()
   end)
 end
 
+
 local async_tasks_2 = function (val)
   return a.sync(function ()
     -- await all
     local w, z = a.wait_all{e2(val, val + 1), e2(val + 2, val + 3)}
     print(unpack(w))
     print(unpack(z))
-    return 4
+    return function ()
+      return 4
+    end
   end)
 end
 
@@ -88,7 +91,7 @@ local async_example = function ()
     -- composable, await other async thunks
     local u = a.wait(async_tasks_1())
     local v = a.wait(async_tasks_2(3))
-    print(u + v)
+    print(u + v())
   end)
 end
 
