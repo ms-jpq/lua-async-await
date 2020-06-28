@@ -2,11 +2,11 @@
 
 Async Await in [90 lines](https://github.com/ms-jpq/neovim-async-tutorial/blob/master/lua/async.lua) of code.
 
-## Preface
-
-### Special Thanks
+## Special Thanks
 
 [svermeulen](https://github.com/svermeulen) for fixing [inability to return functions](https://github.com/ms-jpq/neovim-async-tutorial/issues/2).
+
+## Preface
 
 This tutorial assumes that you are familiar with the concept of `async` `await`
 
