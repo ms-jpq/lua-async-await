@@ -177,21 +177,22 @@ The sole job of the `step` funciton is to take the place of the callback to all 
 In essence, on every callback, we take 1 step forward in the coroutine.
 
 ```lua
-local pong = function (thread, callback)
+local pong = function (func, callback)
+  assert(type(func) == "function", "type error :: expected func")
+  local thread = co.create(func)
   local step = nil
   step = function (...)
-    local go, ret = co.resume(thread, ...)
-    if not go then
-      assert(co.status(thread) == "suspended", ret)
-    elseif type(ret) == "function" then
-      ret(step)
-    else
+    local stat, ret = co.resume(thread, ...)
+    assert(stat, ret)
+    if co.status(thread) == "dead" then
       (callback or function () end)(ret)
+    else
+      assert(type(ret) == "function", "type error :: expected func")
+      ret(step)
     end
   end
   step()
 end
-
 ```
 
 Notice that we also make pong call a callback once it is done.
