@@ -1,6 +1,6 @@
-# [Lua Async Await](https://ms-jpq.github.io/neovim-async-tutorial)
+# [Lua Async Await](https://ms-jpq.github.io/lua-async-await)
 
-Async Await in [90 lines](https://github.com/ms-jpq/neovim-async-tutorial/blob/master/lua/async.lua) of code.
+Async Await in [90 lines](https://github.com/ms-jpq/lua-async-await/blob/master/lua/async.lua) of code.
 
 Originally written for Neovim, because it uses the same `libuv` eventloop from NodeJS.
 
@@ -8,7 +8,7 @@ Originally written for Neovim, because it uses the same `libuv` eventloop from N
 
 ## Special Thanks
 
-[svermeulen](https://github.com/svermeulen) for fixing [inability to return functions](https://github.com/ms-jpq/neovim-async-tutorial/issues/2).
+[svermeulen](https://github.com/svermeulen) for fixing [inability to return functions](https://github.com/ms-jpq/lua-async-await/issues/2).
 
 ## Preface
 
@@ -324,7 +324,7 @@ end)()
 
 I have bundle up this tutorial as a vim plugin, you can install it the usual way.
 
-`Plug 'ms-jpq/neovim-async-tutorial', {'branch': 'neo'}`
+`Plug 'ms-jpq/lua-async-await', {'branch': 'neo'}`
 
 and then call the test functions like so:
 
