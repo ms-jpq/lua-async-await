@@ -1,6 +1,10 @@
-# [Neovim Async Tutorial (lua)](https://ms-jpq.github.io/neovim-async-tutorial)
+# [Lua Async Await](https://ms-jpq.github.io/neovim-async-tutorial)
 
 Async Await in [90 lines](https://github.com/ms-jpq/neovim-async-tutorial/blob/master/lua/async.lua) of code.
+
+Originally written for Neovim, because it uses the same `libuv` eventloop from NodeJS.
+
+**Works for any LUA code**
 
 ## Special Thanks
 
