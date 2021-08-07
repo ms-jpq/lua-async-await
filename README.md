@@ -119,7 +119,7 @@ local thread = co.create(function ()
   local x = co.yield(1)
   print(x)
   local y, z = co.yield(2, 3)
-  print(y)
+  print(y, z)
 end)
 
 pong(thread)
