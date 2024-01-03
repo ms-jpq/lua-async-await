@@ -34,15 +34,15 @@ Our goal is avoid the dreaded calback hell.
 local a = require "async"
 
 local do_thing = a.sync(function (val)
-  local o = a.wait(async_func())
+  local o = a.wait(async_func1())
   return o + val
 end)
 
 local main = a.sync(function ()
   local thing = a.wait(do_thing()) -- composable!
 
-  local x = a.wait(async_func())
-  local y, z = a.wait_all{async_func(), async_func()}
+  local x = a.wait(async_func2())
+  local y, z = a.wait_all{async_func3(), async_func4()}
 end)
 
 main()
@@ -65,8 +65,8 @@ To avoid confusion, I will follow the convention used in the Lua book, and use `
 ```lua
 local co = coroutine
 
-local thread = co.create(function ()
-  local x, y, z = co.yield(something)
+local thread = co.create(function (x, y, z)
+  co.yield(ret)
   return 12
 end)
 
